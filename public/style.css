@@ -3,9 +3,9 @@
   padding:0;
 }
 #navbar{
-  height: 7vh;
+  height: 5vh;
   width:100vw;
-  background-color: rgb(65, 3, 83);
+  background-color: blueviolet;
   position:fixed;
   top:0;
 }
@@ -13,20 +13,19 @@
   height: 100vh;
   display: flex;
   background-color: #3d3d42;
-  margin-top: 7vh;
+  margin-top: 5vh;
 }
 .video-container {
   padding:1vh;
-  height: 93vh;
-  width:79vw;
+  height: 95vh;
+  width:80vw;
 
 }
 #video-grid {
   position:fixed;
   display: grid;
-  grid-template-columns:20vw 20vw 20vw 20vw;
-  grid-auto-rows: 300px;
-  background-color: white;
+  grid-template-columns:30vw 30vw;
+  grid-auto-rows: 40vh;
 }
 
 video {
@@ -39,8 +38,8 @@ video {
 .msg-pannel {
   position: fixed;
   right: 0;
-  top: 7vh;
-  height: 93vh;
+  top: 5vh;
+  height: 95vh;
   background-color: #242324;
   width: 20vw;
 }
