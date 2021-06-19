@@ -9,10 +9,10 @@ myVideo.muted = true
 const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: true
+  audio: false
 }).then(stream => {
   addVideoStream(myVideo, stream)
-
+  socket.emit('message','a new user-connected')
   myPeer.on('call', call => {
     call.answer(stream)
     const video = document.createElement('video')
@@ -23,6 +23,19 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
+  })
+  // input value
+  let text = $("#chat-message");
+  // when press enter send message
+  $('html').keydown(function (e) {
+    if (e.which == 13 && text.val().length !== 0) {
+      socket.emit('message', text.val());
+      text.val('')
+    }
+  });
+  socket.on("ShowMessage", message => {
+    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+    scrollToBottom()
   })
 })
 
@@ -53,4 +66,11 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
+}
+
+
+
+function scrollToBottom(){
+  var chatWindow = $('.main-chat-window');
+  chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
 }
