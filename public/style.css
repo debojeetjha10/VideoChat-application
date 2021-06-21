@@ -22,10 +22,11 @@
 
 }
 #video-grid {
-  position:fixed;
   display: grid;
   grid-template-columns:30vw 30vw;
   grid-auto-rows: 40vh;
+  column-gap: 10vw;
+  row-gap: 3vh;
 }
 
 video {
@@ -34,6 +35,11 @@ video {
   height: 100%;
   object-fit: cover;
   border:2px solid red;
+}
+
+video :hover{
+  box-shadow: #3d3d42;
+  transition: all 0.2s ease-out;
 }
 .msg-pannel {
   position: fixed;
