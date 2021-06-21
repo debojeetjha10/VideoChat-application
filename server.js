@@ -7,7 +7,6 @@ const { v4: uuidV4 } = require('uuid')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(cors())
-
 app.get('/', (req, res) => {
   res.redirect(`/${uuidV4()}`)
 })
