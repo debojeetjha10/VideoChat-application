@@ -6,6 +6,7 @@ const myPeer = new Peer(undefined, {
   port: '',
   secure:true,
   debug: 3, config: {'iceServers':[
+    //{"username":"QDH2xyHSMvT0UedE-MePIPjlEkRmXVRzCtoC6wdg5nNe6P_tC1q8IDvz7f8XcmCVAAAAAGDRkclzb21lb25lNDA0","urls":["stun:bn-turn1.xirsys.com","turn:bn-turn1.xirsys.com:80?transport=udp","turn:bn-turn1.xirsys.com:3478?transport=udp","turn:bn-turn1.xirsys.com:80?transport=tcp","turn:bn-turn1.xirsys.com:3478?transport=tcp","turns:bn-turn1.xirsys.com:443?transport=tcp","turns:bn-turn1.xirsys.com:5349?transport=tcp"],"credential":"d7a15dec-d32b-11eb-b581-0242ac140004"},
     {
       url: 'turn:numb.viagenie.ca',
       credential: 'kXyzNqUpQqER3y!',
@@ -15,11 +16,13 @@ const myPeer = new Peer(undefined, {
   ]}});
 const myVideo = document.createElement('video')
 myVideo.muted = true
+var MyVideoStream;
 const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
 }).then(stream => {
+  MyVideoStream = stream;
   addVideoStream(myVideo, stream)
   socket.emit('message','a new user-connected')
   myPeer.on('call', call => {
@@ -83,3 +86,18 @@ function scrollToBottom(){
   var chatWindow = $('.main-chat-window');
   chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
 }
+
+
+const muteUnmute = () => {
+  const enabled = MyVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    MyVideoStream.getAudioTracks()[0].enabled = false;
+    document.getElementById('mute-button').innerHTML = 'unmute'
+    //setUnmuteButton();
+  } else {
+    //setMuteButton();
+    document.getElementById('mute-button').innerHTML = 'mute'
+    MyVideoStream.getAudioTracks()[0].enabled = true;
+  }
+}
+document.getElementById('mute-button').onclick = muteUnmute;
