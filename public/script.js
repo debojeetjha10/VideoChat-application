@@ -89,8 +89,8 @@ function scrollToBottom(){
 
 
 const muteUnmute = () => {
-  const enabled = MyVideoStream.getAudioTracks()[0].enabled;
-  if (enabled) {
+  const state = MyVideoStream.getAudioTracks()[0].enabled;
+  if (state) {
     MyVideoStream.getAudioTracks()[0].enabled = false;
     document.getElementById('mute-button').innerHTML = 'unmute'
     //setUnmuteButton();
@@ -100,4 +100,29 @@ const muteUnmute = () => {
     MyVideoStream.getAudioTracks()[0].enabled = true;
   }
 }
+const playStop = () => {
+  var state = MyVideoStream.getVideoTracks()[0].enabled;
+  if (state) {
+    MyVideoStream.getVideoTracks()[0].enabled = false;
+    document.getElementById('video-on-off-button').innerHTML = 'video off'
+  } else {
+
+    document.getElementById('video-on-off-button').innerHTML = 'video on'
+
+    MyVideoStream.getVideoTracks()[0].enabled = true;
+  }
+}
 document.getElementById('mute-button').onclick = muteUnmute;
+document.getElementById('video-on-off-button').onclick = playStop;
+
+const handleCalenderDisplay = ()=>{
+  if(document.getElementById('google-calender').style.display == 'none'){
+    document.getElementById('google-calender').style.display = 'block';
+  }
+  else{
+  document.getElementById('google-calender').style.display = 'none'
+  }
+  console.log(document.getElementById('google-calender').style.display)
+}
+document.getElementById('google-calender').style.display = 'none'
+document.getElementById('calender-img-container').onclick = handleCalenderDisplay;
