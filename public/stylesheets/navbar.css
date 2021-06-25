@@ -1,0 +1,21 @@
+#navbar{
+    height: 5vh;
+    width:100vw;
+    background-color: blueviolet;
+    position:fixed;
+    top:0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .navbar-logo{
+    height: 4vh;
+    width: auto;
+  }
+  .navbar-logo-left{
+    width: 12vw;
+    margin-left: 5vh;
+  }
+  .navbar-logo:active{
+      background-color:rgb(107, 7, 69) ;
+      transition: all 0.1s ;
+  }

@@ -5,24 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script>
-    const ROOM_ID = "<%= roomId %>"
+    const ROOM_ID = "<%= roomId %>";
+    const user = "<%= user %>"
+    console.log(user)
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
   <script  defer src="/socket.io/socket.io.js"></script>
   <script  defer src="script.js" type="text/javascript"></script>
+  <script  defer src="scripts/peer-socket-connection.js" type="text/javascript"></script>
+  <script  defer src="scripts/message.js" type="text/javascript"></script>
+  <script  defer src="scripts/call-control.js" type="text/javascript"></script>
+  <script  defer src="scripts/button-control.js" type="text/javascript"></script>
   <link  rel='stylesheet' href = 'style.css'/>
+  <link  rel='stylesheet' href = 'stylesheets/navbar.css'/>
+  <link  rel='stylesheet' href = 'stylesheets/main-content.css'/>
+  <link  rel='stylesheet' href = 'stylesheets/sidebar.css'/>
+  <link  rel='stylesheet' href = 'stylesheets/chat.css'/>
+  <link  rel='stylesheet' href = 'stylesheets/footer.css'/>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="icon" href="logos/teams_icon.ico" />
   <title>Teams Meeting</title>
 </head>
 <body>
   <header id='navbar'>
-    <div id="teams-logo"></div>
-    <div> <button  id="mute-button" >mute here</button>
-      <button  id="video-on-off-button" >video on</button>
+    <div id='teams-logo-container'>
+      <img id="teams-logo" class='navbar-logo' src='logos/teams.png'  alt='Teams Logos'/>
     </div>
-    <div id="user-logo"></div>
+    <div class='navbar-logo-left'>
+      <img id="mute-button" class='navbar-logo ' src='logos/mute.png'  alt='Button'/>
+      <!-- <div> <button  id="mute-button" >mute here</button> -->
+        <!-- <button  id="video-on-off-button" >video on</button> -->
+        <img id="video-on-off-button" class='navbar-logo' src='logos/video-on.png'  alt='Button'/>
+        <img id="call-end" class='navbar-logo' src='logos/phone-call-end.png'  alt='Button'/>
+        <img id="user-logo" class='navbar-logo' src='logos/user.png'  alt='Button'/>
+    </div>
   </header>
   <div id="sidebar">
     <div id='calender-clock-container'>
