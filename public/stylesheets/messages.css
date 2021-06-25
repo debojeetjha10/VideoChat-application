@@ -23,7 +23,7 @@
     display: flex;
     color: white;
   }
-  .message{
+  #messages{
       color:white;
       margin-left: 1.5vw;
   }

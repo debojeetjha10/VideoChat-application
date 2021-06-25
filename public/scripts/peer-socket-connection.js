@@ -36,17 +36,11 @@ navigator.mediaDevices.getUserMedia({
   socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
   })
-  // input value
-  let text = $("#chat-message");
-  // when press enter send message
-  $('html').keydown(function (e) {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
-      text.val('')
-    }
-  });
   socket.on("ShowMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+    let Msg = document.createElement('li')
+    Msg.className='message'
+    Msg.innerHTML = `<b>${message.sender}</b><br/> ${message.msgContent}`
+    document.getElementById("messages").appendChild(Msg);
     scrollToBottom()
   })
 })
@@ -86,3 +80,14 @@ function scrollToBottom(){
   var chatWindow = $('.main-chat-window');
   chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
 }
+let text = document.getElementById("chat-message");
+// when press enter send message
+document.onkeydown = (function (key) {
+  if (key.which == 13 && text.value.length !== 0) {
+    socket.emit('message',{
+        msgContent: text.value,
+        sender : "Your friend"
+    } );
+    text.value ='';
+  }
+});
