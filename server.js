@@ -12,7 +12,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:room', (req, res) => {
-  console.log(req.query.name + "fuyge" );
   res.render('room', { roomId: req.params.room , user : req.query.name })
 })
 
