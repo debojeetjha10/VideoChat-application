@@ -13,12 +13,18 @@
     color: #f5f5f5;
     text-align: center;
   }
-  .main-chat-window {
-  overflow-y: auto;
+  #main-chat-window {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
   margin-top: 3vh;
   max-height: 78vh;
   margin-bottom: 3vh;
   }
+  #main-chat-window::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+  }
+
   .main-message-container {
     display: flex;
     color: white;

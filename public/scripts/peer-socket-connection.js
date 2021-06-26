@@ -77,8 +77,8 @@ function addVideoStream(video, stream) {
 
 
 function scrollToBottom(){
-  var chatWindow = $('.main-chat-window');
-  chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
+  let chatWindow = document.getElementById('main-chat-window');
+  chatWindow.scrollTop = chatWindow.scrollHeight
 }
 let text = document.getElementById("chat-message");
 // when press enter send message
@@ -86,7 +86,7 @@ document.onkeydown = (function (key) {
   if (key.which == 13 && text.value.length !== 0) {
     socket.emit('message',{
         msgContent: text.value,
-        sender : "Your friend"
+        sender : MY_NAME
     } );
     text.value ='';
   }

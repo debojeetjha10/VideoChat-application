@@ -8,7 +8,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(cors())
 app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
+  res.redirect(`/${uuidV4()}?name=idontknwowho`)
 })
 
 app.get('/:room', (req, res) => {
