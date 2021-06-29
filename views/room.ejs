@@ -6,7 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script>
     const ROOM_ID = "<%= roomId %>";
-    const MY_NAME = "<%= user %>"
+    var MY_NAME = "<%= user %>"
+    if(MY_NAME=="" || MY_NAME=='undefined'){
+       MY_NAME = window.prompt('Enter Your Name: ');
+
+    }
   </script>
   <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
   <script  defer src="/socket.io/socket.io.js"></script>
@@ -27,7 +31,7 @@
 <body>
   <header id='navbar'>
     <div id='teams-logo-container'>
-      <img id="teams-logo" class='navbar-logo' src='logos/teams.png'  alt='Teams Logos'/>
+      <img id="teams-logo" title='teams logo ' class='navbar-logo' src='logos/teams.png'  alt='Teams Logos'/>
     </div>
     <div class='navbar-logo-left'>
       <img id="mute-button" class='navbar-logo ' src='logos/mute.png'  alt='Button'/>
