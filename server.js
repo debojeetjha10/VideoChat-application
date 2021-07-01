@@ -8,7 +8,8 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(cors())
 app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}?name=idontknwowho`)
+  console.log(req.query.name);
+  res.redirect(`/${uuidV4()}?name=${req.query.name}`)
 })
 
 app.get('/:room', (req, res) => {
@@ -19,6 +20,10 @@ io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
     socket.to(roomId).broadcast.emit('user-connected', userId)
+    io.to(roomId).emit('ShowMessage',{
+      msgContent:'A new user Connected',
+      sender:'system'
+    })
     socket.on('message', (message) => {
       //send message to the same room
       io.to(roomId).emit('ShowMessage', message)

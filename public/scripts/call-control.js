@@ -1,4 +1,4 @@
-const muteUnmute = () => {
+const MuteUnmute = () => {
     const state = MyVideoStream.getAudioTracks()[0].enabled;
     if (state) {
       MyVideoStream.getAudioTracks()[0].enabled = false;
@@ -8,7 +8,7 @@ const muteUnmute = () => {
       MyVideoStream.getAudioTracks()[0].enabled = true;
     }
   }
-  const playStop = () => {
+  const PlayStop = () => {
     var state = MyVideoStream.getVideoTracks()[0].enabled;
     if (state) {
       MyVideoStream.getVideoTracks()[0].enabled = false;
@@ -20,6 +20,10 @@ const muteUnmute = () => {
       MyVideoStream.getVideoTracks()[0].enabled = true;
     }
   }
-  document.getElementById('mute-button').onclick = muteUnmute;
-  document.getElementById('video-on-off-button').onclick = playStop;
+  document.getElementById('mute-button').onclick = MuteUnmute;
+  document.getElementById('video-on-off-button').onclick = PlayStop;
   
+  const EndCall = () => {
+    socket.to(roomId).broadcast.emit('user-disconnected', userId);
+  }
+  document.getElementById('call-end-button').onclick = EndCall;

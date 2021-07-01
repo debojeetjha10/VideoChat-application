@@ -24,7 +24,6 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
   MyVideoStream = stream;
   addVideoStream(myVideo, stream)
-  socket.emit('message','a new user-connected')
   myPeer.on('call', call => {
     call.answer(stream)
     const video = document.createElement('video')
@@ -44,7 +43,6 @@ navigator.mediaDevices.getUserMedia({
     scrollToBottom()
   })
 })
-
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
