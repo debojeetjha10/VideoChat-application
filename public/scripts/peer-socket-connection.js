@@ -3,13 +3,13 @@ const socket = io('/')
 //Getting the video-grid to append the videos
 const videoGrid = document.getElementById('video-grid')
 //Making a  unique peer for the specific client
-//this makes sending and recieving video-calls easier 
+//this makes sending and receiving video-calls easier 
 const myPeer = new Peer(undefined, {
   key:'peerjs',
   host: 'debo-peerjs.herokuapp.com',
   port: '',
   secure:true,
-    // this config containes the ice-server configs(turn,stun servers)
+    // this config contains the ice-server configs(turn,stun servers)
    config: {'iceServers':[
     { url: 'stun:stun.l.google.com:19302' },
     //{"username":"QDH2xyHSMvT0UedE-MePIPjlEkRmXVRzCtoC6wdg5nNe6P_tC1q8IDvz7f8XcmCVAAAAAGDRkclzb21lb25lNDA0","urls":["stun:bn-turn1.xirsys.com","turn:bn-turn1.xirsys.com:80?transport=udp","turn:bn-turn1.xirsys.com:3478?transport=udp","turn:bn-turn1.xirsys.com:80?transport=tcp","turn:bn-turn1.xirsys.com:3478?transport=tcp","turns:bn-turn1.xirsys.com:443?transport=tcp","turns:bn-turn1.xirsys.com:5349?transport=tcp"],"credential":"d7a15dec-d32b-11eb-b581-0242ac140004"},

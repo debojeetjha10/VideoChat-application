@@ -8,14 +8,23 @@
     justify-content: space-between;
   }
   .navbar-logo{
-    height: 4vh;
-    width: auto;
+    height: 5vh;
   }
   .navbar-logo-left{
-    width: 12vw;
-    margin-left: 5vh;
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    margin-right: 1vw;
+    column-gap: 0.2vw;
   }
   .navbar-logo:active{
       background-color:rgb(107, 7, 69) ;
       transition: all 0.1s ;
+  }
+  #search-input-box{
+    width: 20vw;
+    margin-top: 1vh;
+    font-size: medium;
+    padding: 0.2vh;
+    border-radius: 1vh;
+
   }
