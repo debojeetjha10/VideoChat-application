@@ -43,3 +43,23 @@ const handleCalenderDisplay = ()=>{
      searchOnBing();
     }
     })
+
+    function copyToClipboard(text) {
+      var dummy = document.createElement("textarea");
+      // to avoid breaking orgain page when copying more words
+      // cant copy when adding below this code
+      // dummy.style.display = 'none'
+      document.body.appendChild(dummy);
+      //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+      dummy.value = text;
+      //selecting the dummy to copy it 
+      dummy.select();
+      document.execCommand("copy");
+      // removing the dummy so it won't make any unwanted changes in the website
+      document.body.removeChild(dummy);
+  }
+
+  document.getElementById('copy-roomId-button').addEventListener('click', (event)=>{
+    event.preventDefault()
+    copyToClipboard(ROOM_ID)
+  })
