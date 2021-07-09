@@ -84,7 +84,7 @@ io.on('connection', socket => {
         sender:message.sender,
         msgContent:message.msgContent
       })
-      const savedata = ()=>{
+      const savemsges = ()=>{
         let jsondata = JSON.stringify(chatdata,null,2)
         fs.writeFile('./chat/'+roomId+'.json',jsondata,(error)=>{
           if(error){
@@ -93,7 +93,7 @@ io.on('connection', socket => {
           }
         })
       }
-      savedata();
+      savemsges();
       //send message to the same room
       //showing the msg to the frontend by this ShowMessage event
       io.to(roomId).emit('ShowMessage', message)
