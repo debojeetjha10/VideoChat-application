@@ -60,8 +60,9 @@ const MuteUnmute = () => {
   document.getElementById('video-on-off-button').onclick = PlayStop;
   // handling the end-call feature
   const EndCall = () => {
+    socket.emit('disconnect')
     // redirecting to the wnd-call msg website this will disconnect us from the existing meeting 
-    window.location.replace('https://google.com');
+    window.location.replace('https://bing.com');
   }
   // firing the endcall function on click on the end-call button
   document.getElementById('call-end-button').onclick = EndCall;
