@@ -1,8 +1,8 @@
 const msges = require('./msg-model')
 const ReadPreference = require('mongodb').ReadPreference
 require('./mongo').connect();
-function get(req,res,roomId){
-    const docquery = msges.find({roomId:"ccceb7f3-080e-4f69-9ce1-bc4cf4aa3354"}).read(ReadPreference.NEAREST)
+function get(req,res,ROOM_ID){
+    const docquery = msges.find({roomId:ROOM_ID}).read(ReadPreference.NEAREST)
 
     docquery.exec().then(msges => res.json(msges)).catch((err)=>{
         res.status(500).send(err)
