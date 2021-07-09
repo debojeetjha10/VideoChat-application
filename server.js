@@ -6,6 +6,7 @@ const express = require('express')
 // to make the server talk and interact with more than one port on same machine
 // and avoid accidental breaks
 const cors = require('cors')
+const fs = require('fs')
 // Initializing the app
 const app = express()
 // making the server with http
@@ -15,12 +16,14 @@ const io = require('socket.io')(server)
 // getting the uuid for making dynamic meet links 
 // using the version 4 as  uuidV4
 const { v4: uuidV4 } = require('uuid')
+const { json } = require('express')
 // setting up the view-engine to ejs 
 // ejs is used in templating the frontend
 app.set('view engine', 'ejs')
 // using the public folder for the source of 
 // the static files (images ,css , frontend scripts etc)
 app.use(express.static('public'))
+app.use('/chat' , express.static('public')) //this is for the chat feature to load static files on /chat path
 // using cors  to make the server talk and interact with more than one port on same machine
 // and avoid accidental breaks
 app.use(cors())
@@ -29,7 +32,14 @@ app.get('/', (req, res) => {
 //   if someone comes to the baseurl make a new room 
 //   using uuid and redirect to that website 
 //   also passing the name params 
-  res.redirect(`/${uuidV4()}?name=${req.query.name}`)
+  var roomId = uuidV4()
+  // creating a json file which will store the chat of this meeting
+  fs.writeFile('./chat/' +  roomId + '.json',JSON.stringify([]),
+  (error)=>
+  console.error(error)
+  );
+
+  res.redirect(`/${roomId}?name=${req.query.name}`)
 })
 //getting get request to join a room with room id as room
 app.get('/:room', (req, res) => {
@@ -38,7 +48,18 @@ app.get('/:room', (req, res) => {
   // used in the client side
   res.render('room', { roomId: req.params.room , user : req.query.name })
 })
-
+app.get('/chat/:room',(req,res)=>{
+  //rendering chat of a room with id specified in the url param
+  res.render('chat-room',{ roomId: req.params.room , user : req.query.name })
+})
+// creating an api which will return all the previous msges of a room 
+app.get('/api/chat/:room',(req,res)=>{
+  let roomId = req.params.room
+  // currently it is storing msges on file system directly in json from and reading from there
+  // to do : change the writing and reading directly with a suitable database
+  let chatData = require('./chat/'+roomId+'.json')
+  res.json(JSON.stringify(chatData))
+})
 // Handling the Socket Connections
 // handling events on socket connection
 io.on('connection', socket => {
@@ -57,16 +78,26 @@ io.on('connection', socket => {
     })
     // handling messages
     socket.on('message', (message) => {
+
+      var chatdata = require('./chat/' + roomId + '.json')
+      chatdata.push({
+        sender:message.sender,
+        msgContent:message.msgContent
+      })
+      const savedata = ()=>{
+        let jsondata = JSON.stringify(chatdata,null,2)
+        fs.writeFile('./chat/'+roomId+'.json',jsondata,(error)=>{
+          if(error){
+          console.error(error)
+          return;
+          }
+        })
+      }
+      savedata();
       //send message to the same room
       //showing the msg to the frontend by this ShowMessage event
       io.to(roomId).emit('ShowMessage', message)
   }); 
-  // handle when socket ends-call
-  socket.on('end-call',(meetinfo)=>{                                            
-    // emit user-disconnected event to everyone in the 
-    // room except the user disconnected
-    socket.to(meetinfo[roomId]).broadcast.emit('user-disconnected', meetinfo[user])
-  })
     // if socket disconnects 
     // disconnect the user from the
     // call by the user-disconnected event
