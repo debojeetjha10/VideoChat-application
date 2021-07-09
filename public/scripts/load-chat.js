@@ -1,6 +1,6 @@
 fetch('/api/chat/'+ROOM_ID).then(res => res.json()).then(
     data=>{
-        data = JSON.parse(data)
+        console.log(data)
         const n = data.length
         for(let i = 0;i<n;i++){
             let message = data[i]

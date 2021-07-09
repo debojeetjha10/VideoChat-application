@@ -6,7 +6,6 @@ const express = require('express')
 // to make the server talk and interact with more than one port on same machine
 // and avoid accidental breaks
 const cors = require('cors')
-const fs = require('fs')
 // Initializing the app
 const app = express()
 // making the server with http
@@ -28,17 +27,13 @@ app.use('/chat' , express.static('public')) //this is for the chat feature to lo
 // and avoid accidental breaks
 app.use(cors())
 //receiving get request at baseurl
+const msgService = require('./Database/msg-service')
 app.get('/', (req, res) => {
 //   if someone comes to the baseurl make a new room 
 //   using uuid and redirect to that website 
 //   also passing the name params 
   var roomId = uuidV4()
   // creating a json file which will store the chat of this meeting
-  fs.writeFile('./chat/' +  roomId + '.json',JSON.stringify([]),
-  (error)=>
-  console.error(error)
-  );
-
   res.redirect(`/${roomId}?name=${req.query.name}`)
 })
 //getting get request to join a room with room id as room
@@ -57,8 +52,8 @@ app.get('/api/chat/:room',(req,res)=>{
   let roomId = req.params.room
   // currently it is storing msges on file system directly in json from and reading from there
   // to do : change the writing and reading directly with a suitable database
-  let chatData = require('./chat/'+roomId+'.json')
-  res.json(JSON.stringify(chatData))
+  msgService.get(req,res,roomId)
+
 })
 // Handling the Socket Connections
 // handling events on socket connection
@@ -78,22 +73,7 @@ io.on('connection', socket => {
     })
     // handling messages
     socket.on('message', (message) => {
-
-      var chatdata = require('./chat/' + roomId + '.json')
-      chatdata.push({
-        sender:message.sender,
-        msgContent:message.msgContent
-      })
-      const savemsges = ()=>{
-        let jsondata = JSON.stringify(chatdata,null,2)
-        fs.writeFile('./chat/'+roomId+'.json',jsondata,(error)=>{
-          if(error){
-          console.error(error)
-          return;
-          }
-        })
-      }
-      savemsges();
+      msgService.create(message.sender,message.msgContent,roomId)
       //send message to the same room
       //showing the msg to the frontend by this ShowMessage event
       io.to(roomId).emit('ShowMessage', message)
