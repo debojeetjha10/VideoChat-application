@@ -11,8 +11,11 @@ const MuteUnmute = () => {
       // making UI changes 
       //Changing the button image
       document.getElementById('mute-button').src  = 'logos/mute.png'
+      //changing the title
+      document.getElementById('mute-button').title = 'press here to unmute'
       //changing the back-ground color
       document.getElementById('mute-button').style.backgroundColor='red';
+
 
     } 
     //if disabled enabling the audio
@@ -23,6 +26,8 @@ const MuteUnmute = () => {
       //Making the UI changes accordingly
       //Changing the button image
       document.getElementById('mute-button').src = 'logos/unmute.png'
+      //changing the title
+      document.getElementById('mute-button').title = 'press here to mute'
       //changing the back-ground color
       document.getElementById('mute-button').style.backgroundColor='blueviolet';
     }
@@ -42,6 +47,9 @@ const MuteUnmute = () => {
       document.getElementById('video-on-off-button').src = 'logos/video-off.png';
       //changing the back-ground color
       document.getElementById('video-on-off-button').style.backgroundColor='red';
+      //changing the title
+      document.getElementById('video-on-off-button').title = 'press here to turn on video'
+
     } 
     //if disabled enabling the video
     // making UI changes accordingly   
@@ -51,6 +59,8 @@ const MuteUnmute = () => {
       //making UI changes
       //Changing the button image
       document.getElementById('video-on-off-button').src = 'logos/video-on.png'
+      //changing the title
+      document.getElementById('video-on-off-button').title = 'press here to turn off video'
       //changing the back-ground color
       document.getElementById('video-on-off-button').style.backgroundColor='blueviolet';
     }
@@ -62,7 +72,7 @@ const MuteUnmute = () => {
   const EndCall = () => {
     socket.emit('disconnect')
     // redirecting to the wnd-call msg website this will disconnect us from the existing meeting 
-    window.location.replace('https://bing.com');
+    window.location.replace('https://example404.azurewebsites.net/end');
   }
   // firing the endcall function on click on the end-call button
   document.getElementById('call-end-button').onclick = EndCall;
