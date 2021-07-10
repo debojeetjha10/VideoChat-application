@@ -22,7 +22,7 @@
         - peer-socket-connection.js   ( this file makes peer and socket connection and    this is responsible  for making the video-chat work)
     - stylesheets (this folder conatins all the stylesheets used in the website the names are sel-explenotary)
         - the stylesheets starting with "chat" are only used in the chat page otherwise every stylesheet is used in both the pages
-    -style.css (this containes some standard initial css used in the pages)
+    - style.css (this containes some standard initial css used in the pages)
 
 - views (this folder contains the ejs templates for the chat and video-call page)
     - chat-room.ejs (this file is for the chat page)
