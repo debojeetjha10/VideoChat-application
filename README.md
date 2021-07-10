@@ -1,6 +1,7 @@
 ## This NodeJs server creates, maintains the video-calls and chats also it is the part which talks with the mongo Database deployed on azure
 ## This is the explanation of the files/folders in this folder
 ## The code is explained in the code comments.
+___
 - 📂Database (This conatins all the files to interact with the database server)
 
     -  📜env.js (this conatins the environment variables)
@@ -53,3 +54,4 @@
 
 - 📜 server.js (this file contains the server side code and manages the   chat and vide call functionality,making web-sockets ,peer connection ,saving and recieving data from the database etc , the code is expplained in the comments)
 
+___
