@@ -1,11 +1,15 @@
 // Making the Socket Connection in the client side
+//for  messaging
 const socket = io('/')
 var userId = MY_NAME
+//adding event handelers for the socket
 socket.on('connect',()=>{
+  // joining a room with specified room ID
     socket.emit('join-room', ROOM_ID, userId)
     console.log('socket connected');
 })
 socket.on("ShowMessage", message => {
+  //showing the msges in the frontend on showmsg event
     let Msg = document.createElement('li')
     Msg.className='message'
     Msg.innerHTML = `<b>${message.sender}</b><br/> ${message.msgContent}`

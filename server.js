@@ -50,8 +50,7 @@ app.get('/chat/:room',(req,res)=>{
 // creating an api which will return all the previous msges of a room 
 app.get('/api/chat/:room',(req,res)=>{
   let roomId = req.params.room
-  // currently it is storing msges on file system directly in json from and reading from there
-  // to do : change the writing and reading directly with a suitable database
+  //getting the responce as an json and sending as an responce
   msgService.get(req,res,roomId)
 
 })
@@ -73,6 +72,7 @@ io.on('connection', socket => {
     })
     // handling messages
     socket.on('message', (message) => {
+      //saving the message in the database server
       msgService.create(message.sender,message.msgContent,roomId)
       //send message to the same room
       //showing the msg to the frontend by this ShowMessage event

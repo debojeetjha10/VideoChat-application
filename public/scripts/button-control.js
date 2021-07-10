@@ -58,8 +58,9 @@ const handleCalenderDisplay = ()=>{
       // removing the dummy so it won't make any unwanted changes in the website
       document.body.removeChild(dummy);
   }
-
+  //copying the roomId on the c lick of the button
   document.getElementById('copy-roomId-button').addEventListener('click', (event)=>{
+    //preventing for any unwanted change on the main page
     event.preventDefault()
     copyToClipboard(ROOM_ID)
   })
