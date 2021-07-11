@@ -14,6 +14,22 @@ const handleCalenderDisplay = ()=>{
   document.getElementById('google-calender').style.display = 'none'
   //On-click on the calender-button fire the HandleCalender functionality
   document.getElementById('calender-img-container').onclick = handleCalenderDisplay;
+  //Handling the Clock Pop-Up feature
+//If Clock-button pressed while Clock is off it will turn on else turn off
+const handleClockDisplay = ()=>{
+  //display the Clock if not displayed
+    if(document.getElementById('clock').style.display == 'none'){
+      document.getElementById('clock').style.display = 'block';
+    }
+    //hide the Clock if displayed
+    else{
+    document.getElementById('clock').style.display = 'none'
+    }
+  }
+  //Initializing the Clock as hidden
+  document.getElementById('clock').style.display = 'none'
+  //On-click on the Clock-button fire the HandleClock functionality
+  document.getElementById('clock-img-container').onclick = handleClockDisplay;
   //handling the Search functionality
   //this will open a tab with the search-results ready
   const searchOnBing = ()=>{
