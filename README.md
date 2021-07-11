@@ -20,7 +20,7 @@ const myPeer = new Peer(undefined, {
   ]}});
 ```
 
-In this Explanation `iceserver,stun,turn` are some keywords used. I have explained this things why we use them and what they are in this [video](https://1drv.ms/v/s!Aqiu0gLTQJGHji8VLAzz5nWOgCJF)(This onedrive page need a reload sometimes).
+<mark>In this Explanation `iceserver,stun,turn` are some keywords used. I have explained this things why we use them and what they are in this [video](https://1drv.ms/v/s!Aqiu0gLTQJGHji8VLAzz5nWOgCJF)(This onedrive page need a reload sometimes). </mark>
 
 ## This is the explanation of the files/folders in this folder
 
