@@ -3,7 +3,22 @@
 ### It creates a `socket` connection with the clients and will recieve msg from one client in a room and send it to everyone else in the same room, The `Peer-connection script` in the `📂public/📂scripts` makes a peer-to-peer connection with every client in a room with webrtc and sends flow of data i.e. Video,audio that we use for the videocall.
 ### Executing the following code we recieve the peer instancce from the peer server and will create a `webrtc client` that we have created in the folder `📂peerserver`
 
-:::code language="javascript" source="public/scripts/peer-socket-connection.js" range="7-21":::
+```javascript
+const myPeer = new Peer(undefined, {
+  key:'peerjs',
+  host: 'debo-peerjs.herokuapp.com',
+  port: '',
+  secure:true,
+    // this config contains the ice-server configs(turn,stun servers)
+   config: {'iceServers':[
+    { url: 'stun:stun.l.google.com:19302' },
+    {
+      url: 'turn_url',
+      credential: 'turn_password',
+      username: 'turn_username'
+  }
+  ]}});
+```
 
 In this Explanation `iceserver,stun,turn` are some keywords used. I have explained this things why we use them and what they are in this [video](https://1drv.ms/v/s!Aqiu0gLTQJGHji8VLAzz5nWOgCJF)(This onedrive page need a reload sometimes).
 
