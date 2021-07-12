@@ -1,5 +1,4 @@
-//fetching the chat api to get all the msg of the room and showing it to the 
-//frontend
+//fetching the chat api to get all the msg of the room and showing it to the frontend
 fetch('/api/chat/'+ROOM_ID).then(res => res.json()).then(
     data=>{
         let n = data.length
