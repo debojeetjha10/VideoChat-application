@@ -17,7 +17,7 @@ socket.on("ShowMessage", message => {
     //scrolling to the bottom of the msg panel so that the latest msg shows at the bottom
     scrollToBottom()
   })
-
+  //sending the message on clicking enter
   document.onkeydown = (function (key) {
     //Getting the msg input from  the Dom
     let msgText = document.getElementById("chat-message");
@@ -34,6 +34,24 @@ socket.on("ShowMessage", message => {
 
     }
   });
+  //sending the message on clicking the send button 
+  document.getElementById('send-message-button').onclick = (()=>
+  {
+      //Getting the msg input from  the Dom
+      let msgText = document.getElementById("chat-message");
+      //if we press the enter key and the msg text is not empty send the msg
+      if (msgText.value.length !== 0) {
+        //emitting the message to the server  so  every connected client gets the message
+        socket.emit('message',{
+          msgContent: msgText.value,
+          sender : MY_NAME
+        } );
+        // making the msg text empty after sending
+        // so we don't have to remove the previous msg before typing a new msg.
+        msgText.value ='';
+  }
+  }
+  )
   // This function Scrolls the Chat window to the bottom 
   // so the latest msg shows up at the bottom
   function scrollToBottom(){
